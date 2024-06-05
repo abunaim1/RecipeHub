@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Barcode+128+Text&family=Merriweather&family=Montserrat+Alternates:ital,wght@0,700;1,600&display=swap');
+
+/* Utilities */
+.montserrat-alternates-bold {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.dancing-script-hub{
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+.primary-text-color{
+    color: #531500;
+}
+.primary-color{
+    background-color: #77574c;
+}
+
+/* Banner */
+.banner-image{
+  position: relative;
+  width: 80%;
+  height: 80vh;
+  margin: auto;
+  background-image: url('/assets/banner.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+.banner-image::after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.44);
+}
+.banner-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
