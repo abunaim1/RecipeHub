@@ -70,7 +70,7 @@
   }
 }
 .card-text-size{
-  font-size: 1.25rem;
+  font-size: 1.10rem;
 }
 .trending-horizontal-line{
   border-bottom: 1px solid #77574c;
@@ -84,4 +84,21 @@
 }
 .popular-recipe-button{
   background-color: #77574c;
+}
+.promotion{
+  height: 390px;
+}
+.podcast-text{
+  font-size:16.5px;
+}
+.listen-button{
+  font-size: 15px ;
+}
+.audio-color-section{
+  background-color: #77574c;
+}
+@media (max-width: 600px) {
+  .audio-color-section{
+    background-color: #e8e8e8;
+  }
 }
