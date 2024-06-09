@@ -10,4 +10,4 @@ function togglePlayPause() {
       icon1.classList.remove('fa-pause');
       icon1.classList.add('fa-play');
     }
-  }
+}

@@ -31,24 +31,6 @@
   background-repeat: no-repeat;
   background-position: center bottom;
 }
-/* .banner-image::after{
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(244, 244, 244, 0.44);
-} */
-/* 
-.banner-text{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-} */
-
 .project-feature{
   width:430px;
   font-family: unit-slab, Georgia, Times, serif;
@@ -102,4 +84,17 @@
   .audio-color-section{
     background-color: #e8e8e8;
   }
+}
+
+/* subscript plan */
+.border-of-plan{
+  border: 1px solid #77574c;
+}
+.price-heading-border-basic{
+  border: 1px solid #77574c;
+  border-radius: 5px;
+}
+.price-heading-border-advance{
+  border: 1px solid white;
+  border-radius: 5px;
 }

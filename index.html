@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RecipeHub</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="css/auth.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/3b65cadd71.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
@@ -21,9 +22,9 @@
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
               <li class="font-semibold"><a>Home</a></li>
-              <li class="font-semibold"><a>Features</a></li>
-              <li class="font-semibold"><a>Subscribe</a></li>
-              <li class="font-semibold"><a>Contact</a></li>
+              <li class="font-semibold"><a>Timeline</a></li>
+              <li class="font-semibold"><a href="./subscription.html">Subscribe</a></li>
+              <li class="font-semibold"><a href="./contact.html">Support</a></li>
             </ul>
           </div>
           <p class="btn btn-ghost text-xl p-0 montserrat-alternates-bold text-3xl font-semibold">Recipe</p>
@@ -32,9 +33,9 @@
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal px-1">
             <li class="font-semibold"><a>Home</a></li>
-            <li class="font-semibold"><a>Features</a></li>
-            <li class="font-semibold"><a>Subscribe</a></li>
-            <li class="font-semibold"><a>Contact</a></li>
+            <li class="font-semibold"><a>Timeline</a></li>
+            <li class="font-semibold"><a href="./subscription.html">Subscribe</a></li>
+            <li class="font-semibold"><a href="./contact.html">Support</a></li>
           </ul>
         </div>
         <div class="navbar-end gap-10">
@@ -49,28 +50,20 @@
             </svg>
             <span class="badge badge-xs indicator-item" style="background-color: #77574c"></span>
           </div>
-          <div class="pr-5 lg:pr-0">
-            <a class="btn text-white" style="background-color: #77574c">Login</a>
+          <div id="login-control" class="pr-5 lg:pr-0">
+            
           </div>
         </div>
       </div>
     </header>
     <main class="bg-base-200 lg:px-52 py-8 pt-16">
+
       <div class="banner">
         <div class="banner-image lg:relative sm:w-100%"></div>
-        <div class="project-feature lg:absolute lg:top-1/3 lg:start-60 bg-base-100 lg:px-8 px-3">
-          <h1 class="text-3xl py-4">Seasonal and comforting</h1>
-          <div>
-            <p class="lg:pb-12 pb-5 lg:relative leading-6 sm:w-full" style="font-size: 17px">
-              Take your pick from our best ever seasonal comfort food recipes for summer, from barbecue burgers and fully loaded nachos to
-              decadent crumbles and retro frozen desserts our best ever seasonal comfort food recipes for summer.
-            </p>
-            <button class="lg:absolute lg:top-52 lg:start-14 primary-color px-3 py-2 text-white rounded">
-              Top 20 summer comfort food recipes
-            </button>
-          </div>
+        <div id="banner-title" class="project-feature lg:absolute lg:top-1/3 lg:start-60 bg-base-100 lg:px-8 px-3 h-fit">
         </div>
       </div>
+
       <div class="popular-recipe-section lg:pt-16 pt-5">
         <h1 class="text-4xl pb-10 px-3 lg:px-0">Popular recipe collections...</h1>
       </div>
@@ -289,7 +282,7 @@
               <div class="audio-color-section col-span-12 lg:col-span-4 rounded pt-10 lg:pt-0 relative">
                 <div class="popular-recipe-button col-span-4 rounded">
                   <div class="px-10">
-                      <h1 class="text-center text-base-100 text-2xl py-7">RecipeHub Premimum Podast</h1>
+                      <h1 class="text-center text-base-100 text-3xl py-7">RecipeHub <a title="Get Premimum access" class="primary-text-color text-base-100 text-semibold" href="">Premimum</a> Podcast</h1>
                       <div>
                         <audio id="audio1" src="./assets/audio.mp3"></audio>
                         <div id="playPauseButton1" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
@@ -301,7 +294,14 @@
                         <audio id="audio2" src="./assets/audio.mp3"></audio>
                         <div id="playPauseButton2" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
                           <i id="playPauseIcon2" class="fa-solid fa-play mr-2"></i>
-                          <p>Good Food Cook Smart podcast</p>
+                          <p>BBC Good Food Cook Smart podcast – energy-efficient cooking</p>
+                        </div>
+                      </div>
+                      <div>
+                        <audio id="audio3" src="./assets/audio.mp3"></audio>
+                        <div id="playPauseButton3" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
+                          <i id="playPauseIcon3" class="fa-solid fa-play mr-2"></i>
+                          <p>Good Food podcast – Donal Skehan talks food and Eurovision</p>
                         </div>
                       </div>
                       <div>
@@ -315,14 +315,7 @@
                         <audio id="audio3" src="./assets/audio.mp3"></audio>
                         <div id="playPauseButton3" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
                           <i id="playPauseIcon3" class="fa-solid fa-play mr-2"></i>
-                          <p>Good Food Cook Smart podcast</p>
-                        </div>
-                      </div>
-                      <div>
-                        <audio id="audio3" src="./assets/audio.mp3"></audio>
-                        <div id="playPauseButton3" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
-                          <i id="playPauseIcon3" class="fa-solid fa-play mr-2"></i>
-                          <p>Good Food Cook Smart podcast</p>
+                          <p>Good Food podcast – Liz Bonnin talks sustainability and Caribbean flavours</p>
                         </div>
                       </div>
                   </div>
@@ -394,5 +387,7 @@
       <small class="text-center font-semibold bg-gray-700 h-9 text-white flex items-center justify-center">©All right reserved</small>
     </footer>
     <script src="./js/script.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/auth.js"></script>
   </body>
 </html>
