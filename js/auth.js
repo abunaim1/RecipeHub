@@ -31,7 +31,7 @@ const login = (event) => {
     email,
     password,
   };
-  fetch(" http://127.0.0.1:8000/auth/token/", {
+  fetch("https://recipehub-backend-ya12.onrender.com/auth/token/", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(info),
@@ -65,7 +65,7 @@ const updateToken = (refresh) => {
   const info = {
     refresh,
   };
-  fetch(" http://127.0.0.1:8000/auth/token/refresh/", {
+  fetch("https://recipehub-backend-ya12.onrender.com/auth/token/refresh/", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(info),
