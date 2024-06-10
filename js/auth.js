@@ -13,6 +13,7 @@ const navBar = () => {
   if (tokens) {
     login.innerHTML = `
     <a href="" class="btn text-white" style="background-color: #77574c">Profile</a>
+    <a onclick="logout()" class="btn text-white" style="background-color: #77574c">Logout</a>
     `
   } 
   else {
@@ -30,7 +31,7 @@ const login = (event) => {
     email,
     password,
   };
-  fetch("https://recipehub-backend-ya12.onrender.com/auth/token/", {
+  fetch(" http://127.0.0.1:8000/auth/token/", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(info),
@@ -46,6 +47,7 @@ const login = (event) => {
         const token_seizer = data.access.split(".");
         const tokenPayload = JSON.parse(atob(token_seizer[1]));
         console.log(tokenPayload.username);
+        alert('Login Successfully!')
         window.location.href = "index.html";
       } else {
         throw new Error("Access or refresh token missing in the response");
@@ -63,7 +65,7 @@ const updateToken = (refresh) => {
   const info = {
     refresh,
   };
-  fetch("https://recipehub-backend-ya12.onrender.com/auth/token/refresh/", {
+  fetch(" http://127.0.0.1:8000/auth/token/refresh/", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(info),
@@ -78,7 +80,7 @@ const updateToken = (refresh) => {
         localStorage.setItem("tokens", JSON.stringify(tokens));
         const token_seizer = data.access.split(".");
         const tokenPayload = JSON.parse(atob(token_seizer[1]));
-        // console.log(tokenPayload.username);
+        console.log(tokenPayload.username);
       }
     });
 };
@@ -102,4 +104,9 @@ const getValue = (id) => {
   return value;
 };
 
+const logout = () => {
+  alert("Logout Successfully")
+  localStorage.removeItem("tokens");
+  window.location.href = "auth.html"
+}
 navBar();

@@ -98,3 +98,20 @@
   border: 1px solid white;
   border-radius: 5px;
 }
+
+
+/* promotions */
+#promotion {
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* For small screens */
+  gap: 14px;
+  padding: 2px;
+}
+
+@media (min-width: 1024px) {
+  #promotion {
+    grid-template-columns: repeat(4, 1fr); /* For large screens */
+    padding: 16px;
+  }
+}

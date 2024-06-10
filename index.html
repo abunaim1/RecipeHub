@@ -141,40 +141,16 @@
       <div class="popular-recipe-section lg:py-7 pt-5">
         <h1 class="text-4xl px-3 lg:px-0">Latest offers and promotions...</h1>
       </div>
-      <div class="latest-offer-promotions w-full h-full promotion bg-base-100 grid grid-cols-1 lg:grid-cols-4 py-7 lg:px-16 gap-10 px-2">
-        <div class="h-full w-full lg:w-60 relative lg:leading-10">
-          <div class="w-full h-48 overflow-hidden">
-            <img src="./assets/offer1.jpg" alt="" class="w-full h-full object-cover" />
-          </div>
-          <h1 class="heading text-xl text-center font-semibold">Magazine Subscription offers</h1>
-          <p class="description text-center">Enjoy your first 5 issues of Good Food Magazine for just £5</p>
-          <button class="btn-neutral primary-color w-full absolute bottom-0 border-0">Order here</button>
-        </div>
-        <div class="h-full w-full lg:w-60 relative leading-10">
-          <div class="w-full h-48 overflow-hidden">
-            <img src="./assets/offer2.jpg" alt="" class="w-full h-full object-cover" />
-          </div>
-          <h1 class="heading text-xl text-center font-semibold">Good Food Wine Club offer</h1>
-          <p class="description text-center">Save 55% on a case of wine – just £4.99 a bottle.</p>
-          <button class="btn-neutral primary-color w-full absolute bottom-0 border-0">Order here</button>
-        </div>
-        <div class="h-full w-full lg:w-60 relative leading-10">
-          <div class="w-full h-48 overflow-hidden">
-            <img src="./assets/offer3.jpg" alt="" class="w-full h-full object-cover" />
-          </div>
-          <h1 class="heading text-xl text-center font-semibold">Exclusive: 25% off Mindful Chef</h1>
-          <p class="description text-center">Save on your first four curated recipe boxes.</p>
-          <button class="btn-neutral primary-color w-full absolute bottom-0 border-0">Order here</button>
-        </div>
-        <div class="h-full w-full lg:w-60 relative leading-10">
-          <div class="w-full h-48 overflow-hidden">
-            <img src="./assets/offer4.jpg" alt="" class="w-full h-full object-cover" />
-          </div>
-          <h1 class="heading text-xl text-center font-semibold">Get Good Food reader offers</h1>
-          <p class="description text-center">Discover exclusive deals & discounts.</p>
-          <button class="btn-neutral primary-color w-full absolute bottom-0 border-0">Order here</button>
-        </div>
+
+
+      <!-- Lates offer and promotions start-->
+      
+      <div id="promotion">
+  
       </div>
+      <!-- Lates offer and promotions end-->
+
+      <!-- Podcast start -->
       <div class="pt-16 h-5/6 w-fit px-3 lg:px-0">
             <p class="text-4xl pb-4">Recipe<span class="font-light text-3xl primary-text-color">Hub</span> Podcast</p>
             <p class="podcast-text">Tune in to the latest episodes to hear our experts discuss all things food.</p>
@@ -282,41 +258,9 @@
               <div class="audio-color-section col-span-12 lg:col-span-4 rounded pt-10 lg:pt-0 relative">
                 <div class="popular-recipe-button col-span-4 rounded">
                   <div class="px-10">
-                      <h1 class="text-center text-base-100 text-3xl py-7">RecipeHub <a title="Get Premimum access" class="primary-text-color text-base-100 text-semibold" href="">Premimum</a> Podcast</h1>
-                      <div>
-                        <audio id="audio1" src="./assets/audio.mp3"></audio>
-                        <div id="playPauseButton1" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
-                          <i id="playPauseIcon1" class="fa-solid fa-play mr-2"></i>
-                          <p>Good Food Cook Smart podcast</p>
-                        </div>
-                      </div>
-                      <div>
-                        <audio id="audio2" src="./assets/audio.mp3"></audio>
-                        <div id="playPauseButton2" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
-                          <i id="playPauseIcon2" class="fa-solid fa-play mr-2"></i>
-                          <p>BBC Good Food Cook Smart podcast – energy-efficient cooking</p>
-                        </div>
-                      </div>
-                      <div>
-                        <audio id="audio3" src="./assets/audio.mp3"></audio>
-                        <div id="playPauseButton3" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
-                          <i id="playPauseIcon3" class="fa-solid fa-play mr-2"></i>
-                          <p>Good Food podcast – Donal Skehan talks food and Eurovision</p>
-                        </div>
-                      </div>
-                      <div>
-                        <audio id="audio3" src="./assets/audio.mp3"></audio>
-                        <div id="playPauseButton3" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
-                          <i id="playPauseIcon3" class="fa-solid fa-play mr-2"></i>
-                          <p>Good Food Cook Smart podcast</p>
-                        </div>
-                      </div>
-                      <div>
-                        <audio id="audio3" src="./assets/audio.mp3"></audio>
-                        <div id="playPauseButton3" class="flex items-center text-white cursor-pointer mb-4 w-full justify-start" onclick="togglePlayPause()">
-                          <i id="playPauseIcon3" class="fa-solid fa-play mr-2"></i>
-                          <p>Good Food podcast – Liz Bonnin talks sustainability and Caribbean flavours</p>
-                        </div>
+                      <h1 class="text-center text-base-100 text-3xl py-7">RecipeHub <a title="Get Premimum access" class="primary-text-color text-base-100 text-semibold" href="subscription.html">Premimum</a> Podcast</h1>
+                      <div id="podcast-episode">
+
                       </div>
                   </div>
                   <button class="btn btn-neutral w-full rounded-none absolute bottom-0">
@@ -327,6 +271,10 @@
             </div>
             </div>
       </div>
+      <!-- Podcast end -->
+
+
+      <!-- SignUp start -->
       <div class="never-miss-recipe h-fit bg-base-300 leading-10 pt-4 pb-6">
           <div class="flex text-center flex-col">
             <h1 class="text-3xl py-5">Never miss a recipe from Good Food</h1>
@@ -341,6 +289,8 @@
             <p>By entering your details, you are agreeing to our <a class="primary-text-color" href="">terms and conditions</a> and <a class="primary-text-color" href="">privacy policy</a>. You can unsubscribe at any time.</p>
           </div>
       </div>
+      <!-- SignUp end -->
+
     </main>
     <footer class="grid bg-base-100 w-full h-full">
       <div class="px-14 mx-auto lg:grid grid-cols-12 gap-16 lg:flex justify-center items-cente py-16">
