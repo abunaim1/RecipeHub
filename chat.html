@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RecipeHub</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="css/auth.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/3b65cadd71.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="./css/auth.css">
+    <style></style>
   </head>
   <body>
     <header>
@@ -35,7 +36,7 @@
             <li class="font-semibold"><a href="./index.html">Home</a></li>
             <li class="font-semibold"><a href="./timeline.html">Timeline</a></li>
             <li class="font-semibold"><a href="./subscription.html">Subscribe</a></li>
-            <li class="font-semibold"><a href="./contact.html">Contact</a></li>
+            <li class="font-semibold"><a href="./contact.html">Support</a></li>
           </ul>
         </div>
         <div class="navbar-end gap-10">
@@ -50,64 +51,53 @@
             </svg>
             <span class="badge badge-xs indicator-item" style="background-color: #77574c"></span>
           </div>
-          <div class="pr-5 lg:pr-0">
-            <a href="./auth.html" class="btn text-white" style="background-color: #77574c">Login</a>
-          </div>
+          <div id="login-control" class="pr-5 lg:pr-0"></div>
         </div>
       </div>
     </header>
-    <main class="bg-base-200 lg:px-52 py-8 pt-16 h-full">
-        <section class="forms-section">
-            <h1 class="section-title">Login or Signup Here</h1>
-            <div class="forms">
-              <div class="form-wrapper is-active">
-                <button type="button" class="switcher switcher-login">
-                  Login
-                  <span class="underline"></span>
-                </button>
-                <form onsubmit="login(event)"  enctype="multipart/form-data" class="form form-login login-height-control relative leading-10 px-10">
-                  <fieldset>
-                    <legend>Please, enter your email and password for login.</legend>
-                    <div class="input-block">
-                      <label for="login-email">E-mail</label>
-                      <input id="email" type="email" required>
-                    </div>
-                    <div class="input-block">
-                      <label for="login-password">Password</label>
-                      <input id="password" type="password" required>
-                    </div>
-                  </fieldset>
-                  <button type="submit" class="btn-login absolute bottom-4">Login</button>
-                </form>
-              </div>
-              <div class="form-wrapper">
-                <button type="button" class="switcher switcher-signup">
-                  Sign Up
-                  <span class="underline"></span>
-                </button>
-                <form class="form form-signup reg-height-control relative leading-10 px-10">
-                  <fieldset>
-                    <legend>Please, enter your email, password and password confirmation for sign up.</legend>
-                    <div class="input-block">
-                      <label for="signup-username">Username</label>
-                      <input id="signup-username" type="text" required>
-                    </div>
-                    <div class="input-block">
-                      <label for="signup-email">E-mail</label>
-                      <input id="signup-email" type="email" required>
-                    </div>
-                    <div class="input-block">
-                      <label for="signup-password">Password</label>
-                      <input id="signup-password" type="password" required>
-                    </div>
-                  </fieldset>
-                  <button type="submit" class="btn-signup absolute bottom-4">Sign Up</button>
-                </form>                
-              </div>
-            </div>
-          </section>
+    <main class="flex-grow pt-28">
+      <!-- Search Bar Section -->
+      <div class="p-4 w-[40vw] mx-auto bg-gray-700 mb-2">
+        <form id="searchForm" class="flex">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Group Name."
+            class="flex-grow p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+          <button type="submit" class="ml-4 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-focus">Add Group</button>
+        </form>
+      </div>
+      <!-- Chat Header -->
+      <div class="flex flex-col bg-slate-800 h-[49vh] w-[40vw] mx-auto mb-10 bg-gray-200">
+        <div style="background-color: #77574c" class="text-white p-4 flex items-center justify-between shadow-md">
+          <h1 class="text-xl font-bold">Chat Room</h1>
+          <p id="userCount" class="text-white"></p>
+          <!-- Update the id here -->
+          <div>
+            <button onclick="logout()" class="bg-primary text-white px-3 py-1 rounded hover:bg-primary-focus">Logout</button>
+          </div>
+        </div>
+        <!-- Chat Messages Section -->
+        <div id="chatMessages" class="chat-messages flex-grow overflow-y-auto p-6 space-y-4 max-h-[400px]">
+          <!-- Example Chat Messages with profile picture and username beside the message -->
+          <div id="otherUser"></div>
+          <div id="loggedInUser"></div>
+        </div>
+        <!-- Input Section -->
+        <form class="p-4 flex items-center border-t border-gray-300" action="">
+          <textarea
+            id="messageInput"
+            rows="1"
+            class="flex-grow p-2 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+            placeholder="Type your message..."
+          ></textarea>
+          <button id="sendButton" class="ml-4 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-focus">Send</button>
+        </form>
+      </div>
     </main>
-    <footer class="grid bg-base-100 w-full h-full">
+
+    <footer class="grid bg-base-100 w-full">
       <div class="px-14 mx-auto lg:grid grid-cols-12 gap-16 lg:flex justify-center items-cente py-16">
         <div class="col-span-4">
           <p class="btn btn-ghost text-xl p-0 montserrat-alternates-bold text-3xl font-semibold">Recipe</p>
@@ -151,6 +141,6 @@
       </div>
       <small class="text-center font-semibold bg-gray-700 h-9 text-white flex items-center justify-center">©All right reserved</small>
     </footer>
-    <script src="./js/auth.js"></script>
+    <script src="./js/chat.js"></script>
   </body>
 </html>

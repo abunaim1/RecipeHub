@@ -5,7 +5,7 @@ const contact = (event) => {
   const message = getValueFor("message");
   const phone = getValueFor("phone");
   const username = getValueFor("username");
-  fetch("https://recipehub-backend-ya12.onrender.com/user/list/")
+  fetch("http://127.0.0.1:8000/user/list/")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((item) => {
@@ -18,13 +18,15 @@ const contact = (event) => {
             message,
             user,
           };
-          fetch("https://recipehub-backend-ya12.onrender.com/support/contact/", {
+          fetch("http://127.0.0.1:8000/support/contact/", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(info),
           })
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+              alert("Your Mail send to the Admin");
+            });
         }
       });
     });
@@ -37,10 +39,16 @@ const getValueFor = (id) => {
 
 const getUser = () => {
   const token = localStorage.getItem("tokens");
-  const tokens = JSON.parse(token);
-  const token_seizer = tokens.access.split(".");
-  const tokenPayload = JSON.parse(atob(token_seizer[1]));
-  document.getElementById("username").value = tokenPayload.username;
+  if (token) {
+    const tokens = JSON.parse(token);
+    const token_seizer = tokens.access.split(".");
+    const tokenPayload = JSON.parse(atob(token_seizer[1]));
+    document.getElementById("username").value = tokenPayload.username;
+  }
+  else{
+    alert('For support you need to login first.')
+    window.location.href = "auth.html"
+  }
 };
 
 getUser();

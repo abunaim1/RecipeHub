@@ -23,6 +23,39 @@ const navBar = () => {
   }
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+  const signupForm = document.querySelector('.form-signup');
+  signupForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const username = document.getElementById("signup-username").value;
+    const email = document.getElementById("signup-email").value;
+    const password = document.getElementById("signup-password").value;
+    const userData = {
+      username: username,
+      email: email,
+      password: password,
+    };
+    fetch("http://127.0.0.1:8000/user/list/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      localStorage.setItem('user_id', data.id)
+      alert('Sign Up Successful!');
+      window.location.href = "auth.html";
+    })
+  });
+});
+
 const login = (event) => {
   event.preventDefault();
   const email = getValue("email");
@@ -31,7 +64,7 @@ const login = (event) => {
     email,
     password,
   };
-  fetch("https://recipehub-backend-ya12.onrender.com/auth/token/", {
+  fetch("http://127.0.0.1:8000/auth/token/", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(info),
@@ -65,7 +98,7 @@ const updateToken = (refresh) => {
   const info = {
     refresh,
   };
-  fetch("https://recipehub-backend-ya12.onrender.com/auth/token/refresh/", {
+  fetch("http://127.0.0.1:8000/auth/token/refresh/", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(info),
