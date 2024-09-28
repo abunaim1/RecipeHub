@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
-      localStorage.setItem('user_id', data.id)
       alert('Sign Up Successful!');
       window.location.href = "auth.html";
     })
@@ -79,6 +78,7 @@ const login = (event) => {
         localStorage.setItem("tokens", JSON.stringify(tokens));
         const token_seizer = data.access.split(".");
         const tokenPayload = JSON.parse(atob(token_seizer[1]));
+        localStorage.setItem("user_id", tokenPayload.user_id)
         console.log(tokenPayload.username);
         alert('Login Successfully!')
         window.location.href = "index.html";
@@ -140,6 +140,7 @@ const getValue = (id) => {
 const logout = () => {
   alert("Logout Successfully")
   localStorage.removeItem("tokens");
+  localStorage.removeItem("user_id");
   window.location.href = "auth.html"
 }
 navBar();
