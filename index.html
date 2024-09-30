@@ -39,17 +39,6 @@
           </ul>
         </div>
         <div class="navbar-end gap-5 flex justify-items-center">
-          <div class="indicator mt-0.5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
-            <span class="badge badge-xs indicator-item" style="background-color: #77574c"></span>
-          </div>
           <div class="indicator">
             <a href="chat.html">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,48 +75,10 @@
 
         <!-- Popular Recipe -->
 
-        <div class="lg:col-span-9 flex items-center flex-wrap gap-10 lg:gap-4">
-          <div class="bg-base-100 w-full lg:w-56 card-height-control relative">
-            <div class="w-full h-48 overflow-hidden hidden lg:block">
-              <img class="h-full w-full object-cover" src="./assets/card4.jpg" alt="" />
-            </div>
-            <div class="absolute bottom-0 card-text-size px-3 pb-5 lg:pb-3 font-semibold">
-              <a href="">Easy healthy dinner in this recipes</a>
-            </div>
-          </div>
-          <div class="bg-base-100 w-full lg:w-56 card-height-control relative">
-            <div class="w-full h-48 overflow-hidden hidden lg:block">
-              <img class="hidden lg:block w-full h-full object-cover" src="./assets/card1.jpg" alt="" />
-            </div>
-            <div class="absolute bottom-0 card-text-size px-3 pb-5 lg:pb-3 font-semibold">
-              <a href="">Vegan curry recipes & Healthy vegetarian</a>
-            </div>
-          </div>
-          <div class="bg-base-100 w-full lg:w-56 card-height-control relative">
-            <div class="w-full h-48 overflow-hidden hidden lg:block">
-              <img class="hidden lg:block w-full h-full object-cover" src="./assets/card2.jpg" alt="" />
-            </div>
-            <div class="absolute bottom-0 card-text-size px-3 pb-5 lg:pb-3 font-semibold">
-              <a href="">Quick and easy family pasta recipes</a>
-            </div>
-          </div>
-          <div class="bg-base-100 w-full lg:w-56 card-height-control relative">
-            <div class="w-full h-48 overflow-hidden hidden lg:block">
-              <img class="hidden lg:block w-full h-full object-cover" src="./assets/card3.jpg" alt="" />
-            </div>
-            <div class="absolute bottom-0 card-text-size px-3 pb-5 lg:pb-3 font-semibold">
-              <a href="">Healthy vegetarian dinner recipes</a>
-            </div>
-          </div>
-          <div class="bg-base-100 w-full lg:w-56 card-height-control relative">
-            <div class="w-full h-48 overflow-hidden hidden lg:block">
-              <img class="hidden lg:block w-full h-full object-cover" src="./assets/card4.jpg" alt="" />
-            </div>
-            <div class="absolute bottom-0 card-text-size px-3 pb-5 lg:pb-3 font-semibold">
-              <a href="">Easy healthy dinner in this recipes</a>
-            </div>
-          </div>
+        <div class="lg:col-span-9 flex items-center flex-wrap gap-10 lg:gap-4" id="recipe-container">
+          <!-- Recipe cards will be dynamically inserted here -->
         </div>
+      
 
         <!-- Trending Now Recipe -->
 
@@ -341,7 +292,6 @@
       <small class="text-center font-semibold bg-gray-700 h-9 text-white flex items-center justify-center">©All right reserved</small>
     </footer>
     <script src="./js/app.js"></script>
-    <script src="./js/auth.js"></script>
     <script src="./js/home.js"></script>
   </body>
 </html>

@@ -143,3 +143,21 @@
   max-height: 400px; 
   object-fit: cover; 
 }
+
+
+/* notification-dropdown */
+#notification-dropdown.hidden {
+  display: none;
+}
+
+#notification-dropdown {
+  display: block;  
+}
+
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/* End notification-dropdown*/

@@ -21,39 +21,60 @@ ws.onerror = function (event) {
 ws.onclose = function (event) {
   console.log("websocket connection closed...", event);
 };
-let notificationCount = 0; 
-ws.onmessage = function(event) {
-    const data = JSON.parse(event.data);
 
-    console.log(data['recipe_id']);
-    console.log(data['from_userId']);
-    console.log(data['to_userId']);
-    if(data['to_userId'] == localStorage.getItem('user_id')){
-        
-        notificationCount += 1;
-        updateNotificationBadge(notificationCount);
 
-    }
-};
+let notificationCount = 0;
+const notificationIcon = document.getElementById('notification-icon');
+const notificationDropdown = document.getElementById('notification-dropdown');
+const notificationList = document.getElementById('notification-list');
 
+document.addEventListener('DOMContentLoaded', () => {
+    const notificationIcon = document.getElementById('notification-icon');
+    const notificationDropdown = document.getElementById('notification-dropdown');
+
+    // Toggle dropdown visibility when the icon is clicked
+    notificationIcon.addEventListener('click', () => {
+        notificationDropdown.classList.toggle('hidden');
+    });
+});
+
+// Update notification badge and add to the dropdown list
 function updateNotificationBadge(count) {
     const badge = document.querySelector('.notification-badge');
-
-    // If there's no badge yet, create it
+    
     if (!badge) {
-        const indicator = document.querySelector('.navbar-end .indicator');
         const badgeElement = document.createElement('span');
         badgeElement.className = 'badge badge-xs notification-badge indicator-item';
         badgeElement.style.backgroundColor = '#77574c';
         badgeElement.style.color = 'white';
         badgeElement.textContent = count;
-        indicator.appendChild(badgeElement);
+        notificationIcon.appendChild(badgeElement);
     } else {
-        // If badge exists, update the count
         badge.textContent = count;
     }
 }
 
+// Add a new message to the notification dropdown
+function addNotificationMessage(message) {
+    const notificationItem = document.createElement('li');
+    notificationItem.className = 'p-2 border-b';
+    notificationItem.innerHTML = `
+        <p class="text-xs text-gray-600 font-semibold">${message}</p>
+    `;
+    notificationList.appendChild(notificationItem);
+}
+
+// WebSocket onmessage function
+ws.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    if (data['to_userId'] == localStorage.getItem('user_id')) {
+        notificationCount += 1;
+        updateNotificationBadge(notificationCount);
+        console.log(data['message']);
+        // Add message to notification dropdown
+        addNotificationMessage(data['message']);
+    }
+};
 
 const toggleReaction = (recipeId, to_userId) => {
   const from_userId = localStorage.getItem("user_id");
