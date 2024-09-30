@@ -66,8 +66,6 @@ const showMessage = () => {
 showMessage();
   
 const displayMsg = (item) => {
-    const otherUser = document.getElementById("otherUser");
-    const loggedInUser = document.getElementById("loggedInUser");
     const chatMessages = document.getElementById("chatMessages");
   
     // Fetch the user data for the message author

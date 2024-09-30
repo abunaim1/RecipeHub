@@ -4,11 +4,66 @@ const getUser = () => {
     const tokens = JSON.parse(token);
     const token_seizer = tokens.access.split(".");
     const tokenPayload = JSON.parse(atob(token_seizer[1]));
-    //   document.getElementById("username").value = tokenPayload.username;
   } else {
     alert("Are you authenticate? You have logIn first!");
     window.location.href = "auth.html";
   }
+};
+
+const ws = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/`);
+
+ws.onopen = function (event) {
+  console.log("Websocket connection open...");
+};
+ws.onerror = function (event) {
+  console.log("Websocket error occurred...", event);
+};
+ws.onclose = function (event) {
+  console.log("websocket connection closed...", event);
+};
+let notificationCount = 0; 
+ws.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+
+    console.log(data['recipe_id']);
+    console.log(data['from_userId']);
+    console.log(data['to_userId']);
+    if(data['to_userId'] == localStorage.getItem('user_id')){
+        
+        notificationCount += 1;
+        updateNotificationBadge(notificationCount);
+
+    }
+};
+
+function updateNotificationBadge(count) {
+    const badge = document.querySelector('.notification-badge');
+
+    // If there's no badge yet, create it
+    if (!badge) {
+        const indicator = document.querySelector('.navbar-end .indicator');
+        const badgeElement = document.createElement('span');
+        badgeElement.className = 'badge badge-xs notification-badge indicator-item';
+        badgeElement.style.backgroundColor = '#77574c';
+        badgeElement.style.color = 'white';
+        badgeElement.textContent = count;
+        indicator.appendChild(badgeElement);
+    } else {
+        // If badge exists, update the count
+        badge.textContent = count;
+    }
+}
+
+
+const toggleReaction = (recipeId, to_userId) => {
+  const from_userId = localStorage.getItem("user_id");
+  ws.send(
+    JSON.stringify({
+      recipe_id: recipeId,
+      to_userId: to_userId,
+      from_userId: from_userId,
+    })
+  );
 };
 
 function toggleComments(button, recipeID) {
@@ -179,7 +234,6 @@ const allPost = () => {
     .catch((err) => console.error("Error fetching posts:", err));
 };
 const displayPost = (item) => {
-    console.log(item);
   const postContainer = document.getElementById("post-container"); // Assuming you have a container with this ID
 
   // Create a new div for each post
@@ -206,14 +260,14 @@ const displayPost = (item) => {
           <img src="${item.media}" alt="Post Image" class="post-image w-full rounded-lg mt-2" />
 
   
-         <!-- Action Buttons -->
+        <!-- Action Buttons -->
           <div class="mt-4 flex justify-between text-gray-600 space-x-0">
-              <button class="flex items-center hover:text-blue-500 transition">
-                  <i class="fas fa-thumbs-up mr-1"></i> Like
-              </button>
-              <button class="flex items-center hover:text-blue-500 transition" onclick="toggleComments(this, ${item.id})">
-                  <i class="fas fa-comment-dots mr-1"></i> Comment
-              </button>
+            <button class="flex items-center hover:text-blue-500 transition" onclick="toggleReaction(${item.id}, ${item.user})">
+                <i class="fas fa-thumbs-up mr-1"></i> Like
+            </button>
+            <button class="flex items-center hover:text-blue-500 transition" onclick="toggleComments(this, ${item.id})">
+                <i class="fas fa-comment-dots mr-1"></i> Comment
+            </button>
           </div>
   
           <!-- Comments Section -->
