@@ -72,7 +72,7 @@ const displayPromotion = (item) => {
       </div>
       <h1 class="heading text-xl text-center font-semibold mt-4">${title}</h1>
       <p class="description text-center mt-2">${description}</p>
-      <button class="btn-neutral primary-color w-full mt-4 h-10">Order here</button>
+      <a onclick="sendingIDtoorderPage(${item.id})"><button class="btn-neutral primary-color w-full mt-4 h-10">Order here</button></a>
     </div>
   `;
 
@@ -118,6 +118,10 @@ const togglePlayPause = (index) => {
   }
 };
 
+const sendingIDtoorderPage = (orderProductID) =>{
+  const orderURL = `promitonOrder.html?id=${orderProductID}`
+  window.location.href = orderURL
+}
 
 promotion();
 loadBanner();

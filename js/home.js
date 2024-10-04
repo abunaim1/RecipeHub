@@ -4,7 +4,7 @@ const navBar = () => {
     const tokens = JSON.parse(token);
     if (tokens) {
       login.innerHTML = `
-      <a href="" class="btn text-white" style="background-color: #77574c">Profile</a>
+      <a href="profile.html" class="btn text-white" style="background-color: #77574c">Profile</a>
       <a onclick="logout()" class="btn text-white" style="background-color: #77574c">Logout</a>
       `
     } 

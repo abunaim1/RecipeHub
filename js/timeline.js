@@ -115,7 +115,7 @@ function toggleComments(button, recipeID) {
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
-                        <p class="mt-1">${item.text}</p>
+                        <p class="mt-1">${item.comment_text}</p>
                     </div>
                 `;
             // Append the comment to the comments section
@@ -148,7 +148,7 @@ async function fetchGroups() {
       const anchor = document.createElement("a");
       anchor.href = `http://127.0.0.1:5500/chat.html?group_name=${encodeURIComponent(group.group_name)}`;
       anchor.textContent = group.group_name;
-      anchor.className = "text-blue-600 hover:underline";
+      anchor.className = "text-gray-800 hover:underline";
 
       li.appendChild(anchor);
       groupList.appendChild(li);
@@ -255,9 +255,8 @@ const allPost = () => {
     .catch((err) => console.error("Error fetching posts:", err));
 };
 const displayPost = (item) => {
-  const postContainer = document.getElementById("post-container"); // Assuming you have a container with this ID
+  const postContainer = document.getElementById("post-container"); 
 
-  // Create a new div for each post
   const postElement = document.createElement("div");
   postElement.classList.add("bg-white", "shadow-md", "rounded-lg", "p-4", "mb-4", "transition", "hover:shadow-lg");
 
@@ -274,19 +273,19 @@ const displayPost = (item) => {
           <p class="mt-4 font-light text-gray-600 leading-relaxed">${item.ingredients}</p>
           
           <div class="mt-4">
-              <p class="font-medium text-gray-800">Flavour: <a href="#" class="text-blue-500 hover:underline">${item.flavour}</a></p>
-              <p class="font-medium text-gray-800">Region: <a href="#" class="text-blue-500 hover:underline">${item.region}</a></p>
-              <p class="font-medium text-gray-800">Season: <a href="#" class="text-blue-500 hover:underline">${item.seasonal}</a></p>
+              <p class="font-medium text-gray-800">Flavour: <a href="#" class="hover:underline">${item.flavour}</a></p>
+              <p class="font-medium text-gray-800">Region: <a href="#" class="hover:underline">${item.region}</a></p>
+              <p class="font-medium text-gray-800">Season: <a href="#" class="hover:underline">${item.seasonal}</a></p>
           </div>
           <img src="${item.media}" alt="Post Image" class="post-image w-full rounded-lg mt-2" />
 
   
         <!-- Action Buttons -->
           <div class="mt-4 flex justify-between text-gray-600 space-x-0">
-            <button class="flex items-center hover:text-blue-500 transition" onclick="toggleReaction(${item.id}, ${item.user})">
+            <button class="flex items-center hover:text-gray-800 transition primary-text-color" onclick="toggleReaction(${item.id}, ${item.user})">
                 <i class="fas fa-thumbs-up mr-1"></i> Like
             </button>
-            <button class="flex items-center hover:text-blue-500 transition" onclick="toggleComments(this, ${item.id})">
+            <button class="flex items-center hover:text-gray-800 transition" onclick="toggleComments(this, ${item.id})">
                 <i class="fas fa-comment-dots mr-1"></i> Comment
             </button>
           </div>
@@ -299,7 +298,7 @@ const displayPost = (item) => {
           <!-- Comment Input Field -->
           <div class="flex mt-2">
               <input id="comment-text-${item.id}" type="text" placeholder="Write a comment..." class="w-full p-2 border border-gray-300 rounded-lg" />
-              <button class="ml-2 bg-blue-500 text-white px-4 rounded-lg hover:bg-blue-600 transition" onclick="postComment(${item.id})">Post</button>
+              <button class="ml-2 text-white primary-color px-4 rounded-lg hover:text-gray-800 transition" onclick="postComment(${item.id})">Post</button>
           </div>
       `;
 
