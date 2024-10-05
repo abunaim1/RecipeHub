@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/3b65cadd71.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <header>
@@ -37,142 +38,163 @@
             <li class="font-semibold"><a href="./contact.html">Support</a></li>
           </ul>
         </div>
-        <div class="navbar-end gap-10">
+        <div class="navbar-end gap-5 flex justify-items-center">
           <div class="indicator">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />
-            </svg>
+            <a href="chat.html">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8v12a2 2 0 002 2h14a2 2 0 002-2V8M3 8l9 5 9-5M3 8l9 5 9-5M3 8h18"
+                />
+              </svg>
+            </a>
             <span class="badge badge-xs indicator-item" style="background-color: #77574c"></span>
           </div>
-          <div class="pr-5 lg:pr-0">
-            <a class="btn text-white" style="background-color: #77574c">Login</a>
-          </div>
+
+          <div id="login-control" class="pr-5 lg:pr-0"></div>
         </div>
       </div>
     </header>
     <main class="bg-base-200 lg:px-52 py-8 pt-16">
-        <div class="subcription-heading py-10 ">
-            <h1 class="text-4xl text-semibold">Subscription </h1>
-            <p class="text-light">Take your desired plan to get access without ads and get all the premimum </p>
+      <div class="subcription-heading py-10">
+        <h1 class="text-4xl text-semibold">Subscription</h1>
+        <p class="text-light">Take your desired plan to get access without ads and get all the premium. Be happy, Maintain hygiene and enjoy your delicious meal.</p>
+      </div>
+      <!-- Plan Selection -->
+      <div class="subscription-heading-two flex flex-col justify-center items-center">
+        <h1 class="text-3xl font-semibold">Choose Your Plan</h1>
+        <div class="join border-of-plan mt-5">
+          <!-- Monthly Button -->
+          <button
+            id="monthly-btn"
+            class="btn-neutral join-item popular-recipe-button px-5 w-44 hover:bg-neutral"
+            onclick="showPlan('monthly')"
+          >
+            Monthly
+          </button>
+          <!-- Yearly Button -->
+          <button id="yearly-btn" class="btn join-item w-44" onclick="showPlan('yearly')">Yearly</button>
         </div>
-        <div class="subscription-heading-two flex flex-col justify-center items-center">
-            <h1 class="text-3xl text-semibold">Choose Your Plan</h1>
-            <div class="join border-of-plan mt-5">
-                <button class="btn-neutral popular-recipe-button join-item px-5 hover:bg-neutral w-44">Monthly</button>
-                <button class="btn join-item text-center w-44">Yearly</button>
-            </div>
+      </div>
+      <!-- Subscription Plan Section -->
+      <div class="relative subscription-card bg-base-300 my-16 m-auto lg:flex justify-center items-center gap-16 py-10">
+        <!-- Background Text -->
+        <div class="absolute inset-0 flex justify-center items-center z-0">
+          <h1 class="recipehub-background-text">RecipeHub</h1>
         </div>
-        <div class="subscription-card bg-base-300 my-16  m-auto lg:flex justify-center items-center gap-16 py-10">
-            <div class="bg-base-100 relative px-12 pt-6 rounded-md h-fit">
-                <div class="flex flex-col items-center">
-                    <h1 class="price-heading-border-basic text-2xl w-fit px-5">Basic</h1>
-                    <h1 class="text-4xl py-2"><i class="fa-solid fa-sterling-sign"></i>7</h1>
-                    <small>User/Month</small>
-                </div>
-                <div class="pt-4 leading-8 pb-20">
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Making Group</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Add Free Support</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Daily Offers</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Other Profile Visualize</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Other Profile Visualize</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Other Profile Visualize</p>
-                </div>
-                <button class="absolute bottom-3 btn-neutral popular-recipe-button ml-7 rounded px-4 py-2">Choose Plan</button>
-            </div>
-            <div class="primary-color text-white relative px-14 pt-6 rounded-md ">
-                <div class="flex flex-col items-center">
-                    <h1 class="price-heading-border-advance text-2xl w-fit px-5">Advance</h1>
-                    <h1 class="text-4xl py-2"><i class="fa-solid fa-sterling-sign"></i>9</h1>
-                    <small>User/Month</small>
-                </div>
-                <div class="pt-4 leading-8 pb-20">
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Making Group</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Daily Offers</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Add Free Support</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Daily Offers</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Add Free Support</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Add Free Support</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Other Profile Visualize</p>
-                </div>
-                <button class="absolute bottom-3 btn-neutral bg-base-100 text-black ml-7 rounded px-4 py-2">Choose Plan</button>
-            </div>
-            <div class="bg-base-100 relative px-12 pt-6 rounded-md h-fit">
-                <div class="flex flex-col items-center">
-                    <h1 class="price-heading-border-basic text-2xl w-fit px-5">Basic</h1>
-                    <h1 class="text-4xl py-2"><i class="fa-solid fa-sterling-sign"></i>7</h1>
-                    <small>User/Month</small>
-                </div>
-                <div class="pt-4 leading-8 pb-20">
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Making Group</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Add Free Support</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Daily Offers</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Other Profile Visualize</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Other Profile Visualize</p>
-                    <p><i class="fa-solid fa-circle-check pr-1"></i>Other Profile Visualize</p>
-                </div>
-                <button class="absolute bottom-3 btn-neutral popular-recipe-button ml-7 rounded px-4 py-2">Choose Plan</button>
-            </div>
+
+        <!-- Foreground content starts -->
+        <!-- Basic Plan (Monthly) -->
+        <div id="monthly-plan" class="bg-base-100 relative px-12 pt-6 rounded-md h-fit z-10">
+          <div class="flex flex-col items-center">
+            <h1 class="price-heading-border-basic text-2xl w-fit px-5">Basic</h1>
+            <h1 class="text-4xl py-2"><i class="fa-solid fa-sterling-sign"></i>7</h1>
+            <small>User/Month</small>
+          </div>
+          <div class="pt-4 leading-8 pb-20">
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Premimum Podcast</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Premimum Recipe</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>First Forward Support</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Daily Offers</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Other Profile Visualize</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Earning with GEM </p>
+          </div>
+          <button class="absolute bottom-3 btn-neutral popular-recipe-button ml-7 rounded px-4 py-2">Choose Plan</button>
         </div>
-        <div class="subscription-includes lg:grid grid-cols-4 leading-10 my-20 mx-20 lg:mx-0">
-            <div>
-                <h1 class="primary-text-color w-fit">All Acounds Included</h1>
-            </div>
-            <div>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-            </div>
-            <div>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-            </div>
-            <div>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-                <p><i class="fa-solid fa-circle-check pr-1"></i>Lorem ipsum dolor sit amet.</p>
-            </div>
+
+        <!-- Advance Plan (Yearly - initially hidden) -->
+        <div id="yearly-plan" class="hidden bg-base-100 relative px-12 pt-6 rounded-md h-fit z-10">
+          <div class="flex flex-col items-center">
+            <h1 class="price-heading-border-basic text-2xl w-fit px-5">Advance</h1>
+            <h1 class="text-4xl py-2"><i class="fa-solid fa-sterling-sign"></i>92</h1>
+            <small>User/Year</small>
+          </div>
+          <div class="pt-4 leading-8 pb-20">
+            <p><i class="fa-solid fa-circle-check pr-1"></i>No Add</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Premimum Podcast</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Premimum Recipe</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>First Forward Support</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Daily Offers</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Other Profile Visualize</p>
+            <p><i class="fa-solid fa-circle-check pr-1"></i>Earning with GEM </p>
+          </div>
+          <button class="absolute bottom-3 btn-neutral popular-recipe-button ml-7 rounded px-4 py-2">Choose Plan</button>
         </div>
-        <div class="frequetly-asked-question bg-base-300 w-full rounded">
-            <h1 class="text-black text-4xl font-semibold pt-10 pl-7">Frequetly asked question</h1>
-            <div class="px-10 py-10 ">
-                <div class="collapse collapse-plus bg-base-200">
-                    <input type="radio" name="my-accordion-3" checked="checked" /> 
-                    <div class="collapse-title text-xl font-medium">
-                      Is we can sell our recipe here?
-                    </div>
-                    <div class="collapse-content"> 
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae possimus quos voluptas ipsum nam qui ab eos dolores nemo alias.</p>
-                    </div>
-                </div>
-                <div class="collapse collapse-plus bg-base-200 mt-5">
-                    <input type="radio" name="my-accordion-3" /> 
-                    <div class="collapse-title text-xl font-medium">
-                      Can we get life time access?
-                    </div>
-                    <div class="collapse-content"> 
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut dolorum assumenda excepturi laborum, adipisci labore placeat incidunt iusto aperiam officiis perferendis ab itaque neque ullam quidem voluptatum libero, corrupti cupiditate.</p>
-                    </div>
-                  </div>
-                <div class="collapse collapse-plus bg-base-200 mt-5">
-                    <input type="radio" name="my-accordion-3" /> 
-                    <div class="collapse-title text-xl font-medium">
-                      Can i get more than one subscription?
-                    </div>
-                    <div class="collapse-content"> 
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit quia cumque expedita animi nesciunt magni dicta voluptatibus odio, quod vero!</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Foreground content ends -->
+      </div>
+
+      <!-- All Acounds Included: -->
+
+      <div class="subscription-includes leading-10 mx-20 pb-20 lg:mx-0 lg:grid grid-cols-4">
+        <div>
+          <h1 class="primary-text-color w-fit">All Acounds Included:</h1>
         </div>
+        <div class="pt-4 leading-8">
+          <p><i class="fa-solid fa-circle-check pr-1"></i>Making Group</p>
+          <p><i class="fa-solid fa-circle-check pr-1"></i>Free Support</p>
+          <p><i class="fa-solid fa-circle-check pr-1"></i>Free Recipe sharing</p>
+        </div>
+        <div class="pt-4 leading-8">
+          <p><i class="fa-solid fa-circle-check pr-1"></i>Explore Recipe</p>
+          <p><i class="fa-solid fa-circle-check pr-1"></i>Personal Profile</p>
+          <p><i class="fa-solid fa-circle-check pr-1"></i>Promoting Products</p>
+        </div>
+        <div class="pt-4 leading-8">
+          <p><i class="fa-solid fa-circle-check pr-1"></i>Buy Products</p>
+          <p><i class="fa-solid fa-circle-check pr-1"></i>Free Podcast</p>
+          <p><i class="fa-solid fa-circle-check pr-1"></i>Explore Trending & Popular Recipe's</p>
+        </div>
+      </div>
+
+      <!-- User Grap -->
+      <div class="subscription-includes leading-10 pb-20 mx-20 lg:mx-0">
+        <div>
+          <h1 class="primary-text-color w-fit">Monthly User Chart:</h1>
+        </div>
+        <div>
+          <canvas id="monthlyUserChart" width="200" height="100"></canvas>
+        </div>
+      </div>
+
+      <!-- Frequetly asked question -->
+
+      <div class="frequetly-asked-question bg-base-300 w-full rounded">
+        <h1 class="text-black text-4xl font-semibold pt-10 pl-7">Frequetly asked question</h1>
+        <div class="px-10 py-10">
+          <div class="collapse collapse-plus bg-base-200">
+            <input type="radio" name="my-accordion-3" checked="checked" />
+            <div class="collapse-title text-xl font-medium">Is we can sell our recipe here?</div>
+            <div class="collapse-content">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae possimus quos voluptas ipsum nam qui ab eos dolores nemo
+                alias.
+              </p>
+            </div>
+          </div>
+          <div class="collapse collapse-plus bg-base-200 mt-5">
+            <input type="radio" name="my-accordion-3" />
+            <div class="collapse-title text-xl font-medium">Can we get life time access?</div>
+            <div class="collapse-content">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut dolorum assumenda excepturi laborum, adipisci labore placeat
+                incidunt iusto aperiam officiis perferendis ab itaque neque ullam quidem voluptatum libero, corrupti cupiditate.
+              </p>
+            </div>
+          </div>
+          <div class="collapse collapse-plus bg-base-200 mt-5">
+            <input type="radio" name="my-accordion-3" />
+            <div class="collapse-title text-xl font-medium">Can i get more than one subscription?</div>
+            <div class="collapse-content">
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit quia cumque expedita animi nesciunt magni dicta
+                voluptatibus odio, quod vero!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer class="grid bg-base-100 w-full h-full">
       <div class="px-14 mx-auto lg:grid grid-cols-12 gap-16 lg:flex justify-center items-cente py-16">
@@ -218,6 +240,6 @@
       </div>
       <small class="text-center font-semibold bg-gray-700 h-9 text-white flex items-center justify-center">©All right reserved</small>
     </footer>
-    <!-- <script src="./js/auth.js"></script> -->
+    <script src="./js/subscription.js"></script>
   </body>
 </html>

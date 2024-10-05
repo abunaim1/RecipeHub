@@ -310,7 +310,6 @@ const displayPost = (item) => {
 document.addEventListener("DOMContentLoaded", allPost);
 
 // Comment post..
-
 function postComment(recipeID) {
   console.log(recipeID);
   const commentText = document.getElementById(`comment-text-${recipeID}`);
@@ -335,7 +334,6 @@ function postComment(recipeID) {
     .then((res) => res.json())
     .then((data) => (commentText.value = ""));
 }
-
 const deleteComment = (commentID) => {
   fetch(`http://127.0.0.1:8000/comment/list/${commentID}/`, {
     method: "DELETE",
@@ -350,7 +348,6 @@ const deleteComment = (commentID) => {
     }
   });
 };
-
 const navBar = () => {
   const login = document.getElementById("login-control");
   const token = localStorage.getItem("tokens");
@@ -372,5 +369,10 @@ const logout = () => {
   localStorage.removeItem("user_id");
   window.location.href = "auth.html";
 };
+
+const userPost = (id) =>{
+    console.log("helloooooo", id);
+}
+
 navBar();
 getUser();

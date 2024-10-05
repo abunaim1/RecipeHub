@@ -139,11 +139,10 @@
 
 /* For Timeline image */
 .post-image {
-  width: 100%; 
-  max-height: 400px; 
-  object-fit: cover; 
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
 }
-
 
 /* notification-dropdown */
 #notification-dropdown.hidden {
@@ -151,9 +150,8 @@
 }
 
 #notification-dropdown {
-  display: block;  
+  display: block;
 }
-
 
 .notification-badge {
   position: absolute;
@@ -161,3 +159,40 @@
   right: 0;
 }
 /* End notification-dropdown*/
+
+.recipehub-background-text {
+  font-size: 15rem; /* Adjust the size as necessary */
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.05); /* Light text */
+  letter-spacing: 1rem;
+  text-transform: uppercase;
+  position: absolute;
+  z-index: -1;
+  white-space: nowrap;
+}
+.subscription-card {
+  background: #f0f0f0; /*Subtle light gray background for contrast */
+  padding: 50px 0;
+  border-radius: 5px;
+}
+#monthly-plan,
+#yearly-plan {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+#monthly-plan:hover,
+#yearly-plan:hover {
+  transform: scale(1.05);
+}
+button {
+  background-color: #a0522d; /* Stylish brown for buttons */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+button:hover {
+  background-color: #8b4513; /* Darker brown on hover */
+}

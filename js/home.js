@@ -32,11 +32,13 @@ const displayTrendingData = (items) => {
     items.forEach(item => {
         trend.innerHTML +=
         `
-            <a class="trending-text" href="#">${item.title}</a>
+            <a class="trending-text" href="recipe.html?recipeId=${item.id}">${item.title}</a>
+            
             <hr class="trending-horizontal-line" />
         `;
     });
 }
+
 document.addEventListener("DOMContentLoaded", loadPostForTrending);
 
 const popularRecipeCount = () => {
@@ -45,7 +47,6 @@ const popularRecipeCount = () => {
     .then(data => {
         // Create a map to count occurrences of each recipe_id
         const recipeCount = {};
-
         data.forEach(item => {
             const recipeId = item.recipe; 
             if (recipeCount[recipeId]) {
@@ -75,18 +76,17 @@ const getPopularRecipe = (recipeIdObject) => {
     .catch(error => console.error('Error fetching recipes:', error));
 }
 
-
 const displayPopularRecipe = (recipes) => {
     const container = document.querySelector('.lg\\:col-span-9');
     container.innerHTML = '';
     recipes.forEach(recipe => {
         const recipeCard = `
-            <div class="bg-base-100 w-full lg:w-56 card-height-control relative">
+            <div class="bg-base-100 w-full lg:w-56 card-height-control relative" data-recipe-id="${recipe.id}">
               <div class="w-full h-48 overflow-hidden hidden lg:block">
                 <img class="h-full w-full object-cover" src="${recipe.media}" alt="${recipe.title}" />
               </div>
               <div class="absolute bottom-0 card-text-size px-3 pb-5 lg:pb-3 font-semibold">
-                <a href="#">${recipe.title}</a>
+                <a href="recipe.html?recipeId=${recipe.id}">${recipe.title}</a>
               </div>
             </div>
         `;
