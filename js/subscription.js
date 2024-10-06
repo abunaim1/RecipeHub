@@ -122,8 +122,24 @@ function showPlan(planType) {
   }
 }
 
+const checkVerificationAndSubscribe = (planId, price) => {
+    fetch("http://127.0.0.1:8000/chat/profile/")
+      .then((res) => res.json())
+      .then((data) => {
+        const userId = localStorage.getItem("user_id");
+        const userProfile = data.find((item) => item.user.id == userId);
+        if (userProfile && userProfile.verified) {
+          alert("You already subscribed to a plan");
+        } else {
+          subscriptionHandle(planId, price);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user profile:", error);
+      });
+  };
+
 const subscriptionHandle = (subscriptionType, amount) => {
-  console.log(subscriptionType, amount);
   fetch("http://127.0.0.1:8000/promotions/product/payment/", {
     method: "POST",
     headers: {
@@ -194,6 +210,13 @@ const makeVerified = (user) =>{
         })
     })
 }
+
+const logout = () => {
+    alert("Logout Successfully");
+    localStorage.removeItem("tokens");
+    localStorage.removeItem("user_id");
+    window.location.href = "auth.html";
+  };
 
 checkSubcribedUser()
 user_count();

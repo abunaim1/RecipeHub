@@ -22,70 +22,104 @@ ws.onclose = function (event) {
   console.log("websocket connection closed...", event);
 };
 
-
 let notificationCount = 0;
-const notificationIcon = document.getElementById('notification-icon');
-const notificationDropdown = document.getElementById('notification-dropdown');
-const notificationList = document.getElementById('notification-list');
+const notificationIcon = document.getElementById("notification-icon");
+const notificationDropdown = document.getElementById("notification-dropdown");
+const notificationList = document.getElementById("notification-list");
 
-document.addEventListener('DOMContentLoaded', () => {
-    const notificationIcon = document.getElementById('notification-icon');
-    const notificationDropdown = document.getElementById('notification-dropdown');
+document.addEventListener("DOMContentLoaded", () => {
+  const notificationIcon = document.getElementById("notification-icon");
+  const notificationDropdown = document.getElementById("notification-dropdown");
 
-    // Toggle dropdown visibility when the icon is clicked
-    notificationIcon.addEventListener('click', () => {
-        notificationDropdown.classList.toggle('hidden');
-    });
+  // Toggle dropdown visibility when the icon is clicked
+  notificationIcon.addEventListener("click", () => {
+    notificationDropdown.classList.toggle("hidden");
+  });
 });
 
 // Update notification badge and add to the dropdown list
 function updateNotificationBadge(count) {
-    const badge = document.querySelector('.notification-badge');
-    
-    if (!badge) {
-        const badgeElement = document.createElement('span');
-        badgeElement.className = 'badge badge-xs notification-badge indicator-item';
-        badgeElement.style.backgroundColor = '#77574c';
-        badgeElement.style.color = 'white';
-        badgeElement.textContent = count;
-        notificationIcon.appendChild(badgeElement);
-    } else {
-        badge.textContent = count;
-    }
+  const badge = document.querySelector(".notification-badge");
+
+  if (!badge) {
+    const badgeElement = document.createElement("span");
+    badgeElement.className = "badge badge-xs notification-badge indicator-item";
+    badgeElement.style.backgroundColor = "#77574c";
+    badgeElement.style.color = "white";
+    badgeElement.textContent = count;
+    notificationIcon.appendChild(badgeElement);
+  } else {
+    badge.textContent = count;
+  }
 }
 
 // Add a new message to the notification dropdown
 function addNotificationMessage(message) {
-    const notificationItem = document.createElement('li');
-    notificationItem.className = 'p-2 border-b';
-    notificationItem.innerHTML = `
+  const notificationItem = document.createElement("li");
+  notificationItem.className = "p-2 border-b";
+  notificationItem.innerHTML = `
         <p class="text-xs text-gray-600 font-semibold">${message}</p>
     `;
-    notificationList.appendChild(notificationItem);
+  notificationList.appendChild(notificationItem);
 }
 
 // WebSocket onmessage function
-ws.onmessage = function(event) {
-    const data = JSON.parse(event.data);
-    if (data['to_userId'] == localStorage.getItem('user_id')) {
-        notificationCount += 1;
-        updateNotificationBadge(notificationCount);
-        console.log(data['message']);
-        // Add message to notification dropdown
-        addNotificationMessage(data['message']);
-    }
+ws.onmessage = function (event) {
+  const data = JSON.parse(event.data);
+  if (data["to_userId"] == localStorage.getItem("user_id")) {
+    notificationCount += 1;
+    updateNotificationBadge(notificationCount);
+    console.log(data["message"]);
+    // Add message to notification dropdown
+    addNotificationMessage(data["message"]);
+  }
 };
 
-const toggleReaction = (recipeId, to_userId) => {
+// Function to check if the user has already liked the recipe
+const checkIfUserLiked = async (recipeId) => {
   const from_userId = localStorage.getItem("user_id");
-  ws.send(
-    JSON.stringify({
-      recipe_id: recipeId,
-      to_userId: to_userId,
-      from_userId: from_userId,
-    })
-  );
+
+  try {
+    const res = await fetch("http://127.0.0.1:8000/comment/react/list/");
+    const data = await res.json();
+
+    // Check if this user has already liked the recipe
+    const userHasLiked = data.some((reaction) => reaction.user == from_userId && reaction.recipe == recipeId);
+    return userHasLiked;
+  } catch (error) {
+    console.error("Error fetching reaction data:", error);
+    return false;
+  }
 };
+
+const toggleReaction = async (recipeId, to_userId) => {
+    const from_userId = localStorage.getItem("user_id");
+  
+    // Check if the user has already liked the recipe
+    const userHasLiked = await checkIfUserLiked(recipeId);
+  
+    if (userHasLiked) {
+      alert("You have already liked this recipe!");
+      return;
+    }
+    ws.send(
+      JSON.stringify({
+        recipe_id: recipeId,
+        to_userId: to_userId,
+        from_userId: from_userId,
+      })
+    );
+  
+    // After the reaction, update the button state
+    const likeButton = document.getElementById(`like-button-${recipeId}`);    
+    if (likeButton) {
+      likeButton.innerHTML = `<i class="fas fa-thumbs-up mr-1"></i> Liked`;
+      likeButton.disabled = true; // Disable the button
+    } else {
+      console.error("Like button element not found!");
+    }
+};
+  
 
 function toggleComments(button, recipeID) {
   const commentsSection = button.closest(".bg-white").querySelector(".comment-section"); // This now works
@@ -113,7 +147,7 @@ function toggleComments(button, recipeID) {
                             <span class="font-semibold">${item.username}</span>
                             <span class="text-gray-500 text-sm">${new Date(item.creation_date).toLocaleString()}</span>
                             <button class="text-red-500 hover:text-red-700" onclick="deleteComment(${item.id})">
-                                ${item.user == localStorage.getItem('user_id') ? '<i class="fas fa-trash"></i>' : ' '}
+                                ${item.user == localStorage.getItem("user_id") ? '<i class="fas fa-trash"></i>' : " "}
                             </button>
                         </div>
                         <p class="mt-1">${item.comment_text}</p>
@@ -255,8 +289,9 @@ const allPost = () => {
     .then((data) => data.forEach((item) => displayPost(item)))
     .catch((err) => console.error("Error fetching posts:", err));
 };
+
 const displayPost = (item) => {
-  const postContainer = document.getElementById("post-container"); 
+  const postContainer = document.getElementById("post-container");
 
   const postElement = document.createElement("div");
   postElement.classList.add("bg-white", "shadow-md", "rounded-lg", "p-4", "mb-4", "transition", "hover:shadow-lg");
@@ -283,9 +318,16 @@ const displayPost = (item) => {
   
         <!-- Action Buttons -->
           <div class="mt-4 flex justify-between text-gray-600 space-x-0">
-            <button class="flex items-center hover:text-gray-800 transition primary-text-color" onclick="toggleReaction(${item.id}, ${item.user})">
+
+        <!-- Working here -->
+        
+            <button id="like-button-${item.id}" class="flex items-center hover:text-gray-800 transition primary-text-color" onclick="toggleReaction(${item.id}, ${item.user})">
                 <i class="fas fa-thumbs-up mr-1"></i> Like
             </button>
+        
+        <!-- To here -->
+
+
             <button class="flex items-center hover:text-gray-800 transition" onclick="toggleComments(this, ${item.id})">
                 <i class="fas fa-comment-dots mr-1"></i> Comment
             </button>
@@ -354,7 +396,7 @@ const navBar = () => {
   const tokens = JSON.parse(token);
   if (tokens) {
     login.innerHTML = `
-      <a href="" class="btn text-white" style="background-color: #77574c">Profile</a>
+      <a href="profile.html" class="btn text-white" style="background-color: #77574c">Profile</a>
       <a onclick="logout()" class="btn text-white" style="background-color: #77574c">Logout</a>
       `;
   } else {
@@ -370,9 +412,9 @@ const logout = () => {
   window.location.href = "auth.html";
 };
 
-const userPost = (id) =>{
-    console.log("helloooooo", id);
-}
+const userPost = (id) => {
+  console.log("helloooooo", id);
+};
 
 navBar();
 getUser();
