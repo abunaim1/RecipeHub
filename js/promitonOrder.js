@@ -21,13 +21,34 @@ const displayOrderProduct = (item) => {
                 </p>
                 ${item.product_count > 0 ? `
                 <div class="mt-4">
-                    <button  onclick="handlePayment(${item.id}, ${item.price})" class="w-full primary-color text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">Pay Now</button>
+                    <button  onclick="orderTake(${item.id}, ${item.price})" class="w-full primary-color text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">Pay Now</button>
                 </div>
                 ` : ''}
             </div>
         </div>
     `;
     productContainer.innerHTML = productHTML;
+}
+
+const orderTake = (productId, amount) =>{
+    fetch('http://127.0.0.1:8000/order/list/', {
+        method: 'POST',
+        headers :{
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            user: localStorage.getItem('user_id'),
+            is_payment: true,
+            payment_amount: amount,
+            pay_reason: "Taking Promotional Product",
+        })
+    })
+    .then(res=>res.json())
+    .then(data=>handlePayment(productId, amount))
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
 }
 
 const handlePayment = (productId, amount) => {

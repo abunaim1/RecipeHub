@@ -13,13 +13,46 @@ const navBar = () => {
       `;
   }
 };
+
+const user_count = () => {
+  fetch("http://127.0.0.1:8000/chat/profile/")
+    .then((res) => res.json())
+    .then((data) => {
+      const monthlyPremiumCount = Array(12).fill(0); // Array for counting premium users by month
+      const monthlyNormalCount = Array(12).fill(0); // Array for counting normal users by month
+      data.forEach((user) => {
+        const creationDate = new Date(user.user_creation_date);
+        const month = creationDate.getMonth(); // Get the month (0-11)
+        if (user.verified) {
+          monthlyPremiumCount[month] += 1; // Increment premium user count
+        } else {
+          monthlyNormalCount[month] += 1; // Increment normal user count
+        }
+      });
+      // Update the chart with dynamic data
+      updateChart(monthlyPremiumCount, monthlyNormalCount);
+    })
+    .catch((error) => console.error("Error fetching data:", error));
+};
+
+const updateChart = (premiumData, normalData) => {
+  const monthlyUserChart = Chart.getChart("monthlyUserChart"); // Get existing chart instance
+  if (monthlyUserChart) {
+    monthlyUserChart.data.datasets[0].data = premiumData; // Update premium users dataset
+    monthlyUserChart.data.datasets[1].data = normalData; // Update normal users dataset
+    monthlyUserChart.update(); // Update the chart
+  } else {
+    console.error("Chart instance not found");
+  }
+};
+
 const ctx = document.getElementById("monthlyUserChart").getContext("2d");
 const data = {
   labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
   datasets: [
     {
       label: "Premium Users",
-      data: [5, 8, 15, 10, 20, 25, 30, 28, 32, 35, 40, 42],
+      data: [],
       backgroundColor: "rgba(75, 192, 192, 0.2)",
       borderColor: "rgba(75, 192, 192, 1)",
       borderWidth: 1,
@@ -28,7 +61,7 @@ const data = {
     },
     {
       label: "Normal Users",
-      data: [10, 12, 20, 15, 25, 28, 35, 32, 38, 42, 48, 50],
+      data: [],
       backgroundColor: "rgba(255, 99, 132, 0.2)",
       borderColor: "rgba(255, 99, 132, 1)",
       borderWidth: 1,
@@ -89,5 +122,79 @@ function showPlan(planType) {
   }
 }
 
+const subscriptionHandle = (subscriptionType, amount) => {
+  console.log(subscriptionType, amount);
+  fetch("http://127.0.0.1:8000/promotions/product/payment/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: subscriptionType,
+      price: amount,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data && data.GatewayPageURL) {
+        fetch("http://127.0.0.1:8000/order/list/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user: localStorage.getItem("user_id"),
+            is_payment: true,
+            payment_amount: amount,
+            pay_reason: "For Subcription",
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            alert("Order Created Successfully!!");
+          });
+        window.location.href = data.GatewayPageURL;
+      } 
+      else {
+        alert("Failed to initiate payment");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+};
 
+const checkSubcribedUser = () =>{
+    fetch("http://127.0.0.1:8000/order/list/")
+    .then(res=>res.json())
+    .then(data=>data.forEach(item=>{
+        if(item.pay_reason=="For Subcription"){
+            makeVerified(item.user)
+        }
+    }))
+}
+
+const makeVerified = (user) =>{
+    console.log(user);
+    fetch("http://127.0.0.1:8000/chat/profile/")
+    .then(res=>res.json())
+    .then(data=>{
+        data.forEach(item=>{
+            if(item.user.id==user && !item.verified){
+                fetch(`http://127.0.0.1:8000/chat/profile/${item.id}/`,{
+                    method: "PUT", // Use PUT for updating
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ verified: true }), 
+                  })
+                .then(res=>res.json())
+                .then(data=>console.log(data))
+            }
+        })
+    })
+}
+
+checkSubcribedUser()
+user_count();
 navBar();

@@ -106,13 +106,14 @@ function toggleComments(button, recipeID) {
         // Filter and display comments for the specific recipe
         data.forEach((item) => {
           if (recipeID == item.recipe) {
+            console.log(item);
             const commentHTML = `
                     <div id="comment-${item.id}" class="bg-gray-100 p-2 rounded-lg">
                         <div class="flex justify-between">
                             <span class="font-semibold">${item.username}</span>
                             <span class="text-gray-500 text-sm">${new Date(item.creation_date).toLocaleString()}</span>
                             <button class="text-red-500 hover:text-red-700" onclick="deleteComment(${item.id})">
-                                <i class="fas fa-trash"></i>
+                                ${item.user == localStorage.getItem('user_id') ? '<i class="fas fa-trash"></i>' : ' '}
                             </button>
                         </div>
                         <p class="mt-1">${item.comment_text}</p>
@@ -313,13 +314,12 @@ document.addEventListener("DOMContentLoaded", allPost);
 function postComment(recipeID) {
   console.log(recipeID);
   const commentText = document.getElementById(`comment-text-${recipeID}`);
-  console.log(commentText);
   const user = localStorage.getItem("user_id");
   const image = null;
-
+  console.log(commentText);
   const commentData = {
     user: user,
-    text: commentText.value,
+    comment_text: commentText.value,
     image: image,
     recipe: recipeID,
   };

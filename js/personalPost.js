@@ -254,7 +254,7 @@ const getUser = () => {
     fetch("http://127.0.0.1:8000/kitchen/post/")
       .then((res) => res.json())
       .then((data) => data.forEach(item=>{
-        if(item.id==r_id){
+        if(localStorage.getItem("user_id") == item.user){
             displayPost(item)
         }
       }))
