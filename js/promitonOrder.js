@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search)
 const id = urlParams.get('id');
 
 const loadOrderProduct = () =>{
-    fetch("https://recipehub-backend-ya12.onrender.com/promotions/list/")
+    fetch("http://127.0.0.1:8000/promotions/list/")
     .then(res=>res.json())
     .then(data=>data.forEach(item=>{if(item.id==id){displayOrderProduct(item)}}))
 }
@@ -31,7 +31,7 @@ const displayOrderProduct = (item) => {
 }
 
 const orderTake = (productId, amount) =>{
-    fetch('https://recipehub-backend-ya12.onrender.com/order/list/', {
+    fetch('http://127.0.0.1:8000/order/list/', {
         method: 'POST',
         headers :{
             'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const orderTake = (productId, amount) =>{
 }
 
 const handlePayment = (productId, amount) => {
-    fetch('https://recipehub-backend-ya12.onrender.com/promotions/product/payment/', {
+    fetch('http://127.0.0.1:8000/promotions/product/payment/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

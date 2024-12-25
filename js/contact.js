@@ -5,7 +5,7 @@ const contact = (event) => {
   const message = getValueFor("message");
   const phone = getValueFor("phone");
   const username = getValueFor("username");
-  fetch("https://recipehub-backend-ya12.onrender.com/user/list/")
+  fetch("http://127.0.0.1:8000/user/list/")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((item) => {
@@ -18,7 +18,7 @@ const contact = (event) => {
             message,
             user,
           };
-          fetch("https://recipehub-backend-ya12.onrender.com/support/contact/", {
+          fetch("http://127.0.0.1:8000/support/contact/", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(info),

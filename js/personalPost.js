@@ -99,7 +99,7 @@ const getUser = () => {
     // Only fetch comments if the section is being opened
     if (isHidden) {
       console.log("Recipe ID:", recipeID);
-      fetch("https://recipehub-backend-ya12.onrender.com/comment/list/")
+      fetch("http://127.0.0.1:8000/comment/list/")
         .then((res) => res.json())
         .then((data) => {
           // Clear previous comments (if any)
@@ -131,7 +131,7 @@ const getUser = () => {
   
   async function fetchGroups() {
     try {
-      const response = await fetch("https://recipehub-backend-ya12.onrender.com/chat/group/");
+      const response = await fetch("http://127.0.0.1:8000/chat/group/");
       if (!response.ok) throw new Error("Network response was not ok");
       const groups = await response.json();
   
@@ -166,7 +166,7 @@ const getUser = () => {
   
     if (groupName) {
       try {
-        const response = await fetch("https://recipehub-backend-ya12.onrender.com/chat/group/", {
+        const response = await fetch("http://127.0.0.1:8000/chat/group/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -230,7 +230,7 @@ const getUser = () => {
     }
   
     try {
-      fetch("https://recipehub-backend-ya12.onrender.com/kitchen/post/", {
+      fetch("http://127.0.0.1:8000/kitchen/post/", {
         method: "POST",
         body: formData,
       })
@@ -251,7 +251,7 @@ const getUser = () => {
   
   // For post to view in timeline
   const allPost = () => {
-    fetch("https://recipehub-backend-ya12.onrender.com/kitchen/post/")
+    fetch("http://127.0.0.1:8000/kitchen/post/")
       .then((res) => res.json())
       .then((data) => data.forEach(item=>{
         if(localStorage.getItem("user_id") == item.user){
@@ -330,7 +330,7 @@ const getUser = () => {
       recipe: recipeID,
     };
   
-    fetch("https://recipehub-backend-ya12.onrender.com/comment/list/", {
+    fetch("http://127.0.0.1:8000/comment/list/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -341,7 +341,7 @@ const getUser = () => {
       .then((data) => (commentText.value = ""));
   }
   const deleteComment = (commentID) => {
-    fetch(`https://recipehub-backend-ya12.onrender.com/comment/list/${commentID}/`, {
+    fetch(`http://127.0.0.1:8000/comment/list/${commentID}/`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

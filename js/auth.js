@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       email: email,
       password: password,
     };
-    fetch("https://recipehub-backend-ya12.onrender.com/user/list/", {
+    fetch("http://127.0.0.1:8000/user/list/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const login = (event) => {
     email,
     password,
   };
-  fetch("https://recipehub-backend-ya12.onrender.com/auth/token/", {
+  fetch("http://127.0.0.1:8000/auth/token/", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(info),
@@ -98,7 +98,7 @@ const updateToken = (refresh) => {
   const info = {
     refresh,
   };
-  fetch("https://recipehub-backend-ya12.onrender.com/auth/token/refresh/", {
+  fetch("http://127.0.0.1:8000/auth/token/refresh/", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(info),

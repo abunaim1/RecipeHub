@@ -18,7 +18,7 @@ const search_group_name = urlParams.get('group_name');
 const search_group_name_modified = search_group_name.replace(/\s+/g, '')
 
 const allGroup = () => {
-    fetch('https://recipehub-backend-ya12.onrender.com/chat/group/', {
+    fetch('http://127.0.0.1:8000/chat/group/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ const allGroup = () => {
 allGroup()
 
 const setGroupIdLocalStorage =()=>{
-    fetch('https://recipehub-backend-ya12.onrender.com/chat/group/')
+    fetch('http://127.0.0.1:8000/chat/group/')
     .then(res => res.json())
     .then(data => data.forEach(item => {
         if(search_group_name==item.group_name)
@@ -48,7 +48,7 @@ const setGroupIdLocalStorage =()=>{
 setGroupIdLocalStorage()
 
 const showMessage = () => {
-    fetch("https://recipehub-backend-ya12.onrender.com/chat/message/")
+    fetch("http://127.0.0.1:8000/chat/message/")
       .then((res) => res.json())
       .then((data) => {
         const chatMessages = document.getElementById("chatMessages"); // Assuming chatMessages is the container for messages
@@ -69,11 +69,11 @@ const displayMsg = (item) => {
     const chatMessages = document.getElementById("chatMessages");
   
     // Fetch the user data for the message author
-    fetch(`https://recipehub-backend-ya12.onrender.com/user/list/${item.author}/`)
+    fetch(`http://127.0.0.1:8000/user/list/${item.author}/`)
       .then((res) => res.json())
       .then((userData) => {
         // Fetch the profile to get the user images
-        fetch("https://recipehub-backend-ya12.onrender.com/chat/profile/")
+        fetch("http://127.0.0.1:8000/chat/profile/")
           .then((res) => res.json())
           .then((profiles) => {
             // Find the profile for the message author
@@ -166,7 +166,7 @@ sendButton.addEventListener("click", () => {
         author: getUserId(),
         body: messageText
     }
-    fetch("https://recipehub-backend-ya12.onrender.com/chat/message/", {
+    fetch("http://127.0.0.1:8000/chat/message/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

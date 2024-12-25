@@ -15,7 +15,7 @@ const navBar = () => {
 };
 
 const user_count = () => {
-  fetch("https://recipehub-backend-ya12.onrender.com/chat/profile/")
+  fetch("http://127.0.0.1:8000/chat/profile/")
     .then((res) => res.json())
     .then((data) => {
       const monthlyPremiumCount = Array(12).fill(0); // Array for counting premium users by month
@@ -123,7 +123,7 @@ function showPlan(planType) {
 }
 
 const checkVerificationAndSubscribe = (planId, price) => {
-    fetch("https://recipehub-backend-ya12.onrender.com/chat/profile/")
+    fetch("http://127.0.0.1:8000/chat/profile/")
       .then((res) => res.json())
       .then((data) => {
         const userId = localStorage.getItem("user_id");
@@ -140,7 +140,7 @@ const checkVerificationAndSubscribe = (planId, price) => {
   };
 
 const subscriptionHandle = (subscriptionType, amount) => {
-  fetch("https://recipehub-backend-ya12.onrender.com/promotions/product/payment/", {
+  fetch("http://127.0.0.1:8000/promotions/product/payment/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -153,7 +153,7 @@ const subscriptionHandle = (subscriptionType, amount) => {
     .then((res) => res.json())
     .then((data) => {
       if (data && data.GatewayPageURL) {
-        fetch("https://recipehub-backend-ya12.onrender.com/order/list/", {
+        fetch("http://127.0.0.1:8000/order/list/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -181,7 +181,7 @@ const subscriptionHandle = (subscriptionType, amount) => {
 };
 
 const checkSubcribedUser = () =>{
-    fetch("https://recipehub-backend-ya12.onrender.com/order/list/")
+    fetch("http://127.0.0.1:8000/order/list/")
     .then(res=>res.json())
     .then(data=>data.forEach(item=>{
         if(item.pay_reason=="For Subcription"){
@@ -192,12 +192,12 @@ const checkSubcribedUser = () =>{
 
 const makeVerified = (user) =>{
     console.log(user);
-    fetch("https://recipehub-backend-ya12.onrender.com/chat/profile/")
+    fetch("http://127.0.0.1:8000/chat/profile/")
     .then(res=>res.json())
     .then(data=>{
         data.forEach(item=>{
             if(item.user.id==user && !item.verified){
-                fetch(`https://recipehub-backend-ya12.onrender.com/chat/profile/${item.id}/`,{
+                fetch(`http://127.0.0.1:8000/chat/profile/${item.id}/`,{
                     method: "PUT", // Use PUT for updating
                     headers: {
                       "Content-Type": "application/json",
