@@ -1,7 +1,7 @@
 const userId = localStorage.getItem("user_id");
 var profile_id = 1;
 const loadProfile = () => {
-  fetch(`http://127.0.0.1:8000/chat/profile/`)
+  fetch(`https://recipehub-backend-ya12.onrender.com/chat/profile/`)
     .then((res) => res.json())
     .then((data) => {
       data.forEach((item) => {
@@ -36,7 +36,7 @@ const profileUpdate = (event) => {
   if (profilePicture) {
     formData.append("image", profilePicture);
   }
-  fetch(`http://127.0.0.1:8000/chat/profile/${profile_id}/`, {
+  fetch(`https://recipehub-backend-ya12.onrender.com/chat/profile/${profile_id}/`, {
     method: "PATCH",
     body: formData,
   })
@@ -67,7 +67,7 @@ const navBar = () => {
 };
 
 const orderShow = () => {
-  fetch("http://127.0.0.1:8000/order/list/")
+  fetch("https://recipehub-backend-ya12.onrender.com/order/list/")
     .then((res) => res.json())
     .then((data) =>
       data.forEach((item) => {

@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
 
 const loadBanner = () => {
-  fetch(`http://127.0.0.1:8000/banner/title/?id=${id}`)
+  fetch(`https://recipehub-backend-ya12.onrender.com/banner/title/?id=${id}`)
     .then((res) => res.json())
     .then((data) => displayBanner(data))
     .catch((error) => console.error("Error fetching banner data:", error));
@@ -28,7 +28,7 @@ const displayBanner = (data) => {
 
 // IIFE - immediately Invoked Function Expression
 (function () {
-  fetch("http://127.0.0.1:8000/banner/title/")
+  fetch("https://recipehub-backend-ya12.onrender.com/banner/title/")
     .then((res) => res.json())
     .then((data) => {
       if (data.length > 0) {
@@ -48,7 +48,7 @@ const displayBanner = (data) => {
 })();
 
 const promotion = () => {
-  fetch("http://127.0.0.1:8000/promotions/list/")
+  fetch("https://recipehub-backend-ya12.onrender.com/promotions/list/")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((item) => {
@@ -80,7 +80,7 @@ const displayPromotion = (item) => {
 };
 
 const podcast = () => {
-  fetch("http://127.0.0.1:8000/podcast/episode/list/normal/")
+  fetch("https://recipehub-backend-ya12.onrender.com/podcast/episode/list/normal/")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((item, index) => {
@@ -124,7 +124,7 @@ const sendingIDtoorderPage = (orderProductID) => {
 };
 
 const fetchPodcastData = () => {
-  fetch("http://127.0.0.1:8000/podcast/premium/")
+  fetch("https://recipehub-backend-ya12.onrender.com/podcast/premium/")
     .then((response) => response.json())
     .then((data) => {
       data.forEach((podcast) => {
@@ -135,7 +135,7 @@ const fetchPodcastData = () => {
 };
 
 const verificationCheck = async () => {
-  const res = await fetch("http://127.0.0.1:8000/chat/profile/");
+  const res = await fetch("https://recipehub-backend-ya12.onrender.com/chat/profile/");
   const data = await res.json();
   const userId = localStorage.getItem("user_id");
   const userProfile = data.find(item => item.user.id == userId);

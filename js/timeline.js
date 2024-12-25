@@ -80,7 +80,7 @@ const checkIfUserLiked = async (recipeId) => {
   const from_userId = localStorage.getItem("user_id");
 
   try {
-    const res = await fetch("http://127.0.0.1:8000/comment/react/list/");
+    const res = await fetch("https://recipehub-backend-ya12.onrender.com/comment/react/list/");
     const data = await res.json();
 
     // Check if this user has already liked the recipe
@@ -131,7 +131,7 @@ function toggleComments(button, recipeID) {
   // Only fetch comments if the section is being opened
   if (isHidden) {
     console.log("Recipe ID:", recipeID);
-    fetch("http://127.0.0.1:8000/comment/list/")
+    fetch("https://recipehub-backend-ya12.onrender.com/comment/list/")
       .then((res) => res.json())
       .then((data) => {
         // Clear previous comments (if any)
@@ -164,7 +164,7 @@ function toggleComments(button, recipeID) {
 
 async function fetchGroups() {
   try {
-    const response = await fetch("http://127.0.0.1:8000/chat/group/");
+    const response = await fetch("https://recipehub-backend-ya12.onrender.com/chat/group/");
     if (!response.ok) throw new Error("Network response was not ok");
     const groups = await response.json();
 
@@ -199,7 +199,7 @@ async function addGroup() {
 
   if (groupName) {
     try {
-      const response = await fetch("http://127.0.0.1:8000/chat/group/", {
+      const response = await fetch("https://recipehub-backend-ya12.onrender.com/chat/group/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -263,7 +263,7 @@ const postSubmit = (event) => {
   }
 
   try {
-    fetch("http://127.0.0.1:8000/kitchen/post/", {
+    fetch("https://recipehub-backend-ya12.onrender.com/kitchen/post/", {
       method: "POST",
       body: formData,
     })
@@ -284,7 +284,7 @@ const postSubmit = (event) => {
 
 // For post to view in timeline
 const allPost = () => {
-  fetch("http://127.0.0.1:8000/kitchen/post/")
+  fetch("https://recipehub-backend-ya12.onrender.com/kitchen/post/")
     .then((res) => res.json())
     .then((data) => data.forEach((item) => displayPost(item)))
     .catch((err) => console.error("Error fetching posts:", err));
@@ -366,7 +366,7 @@ function postComment(recipeID) {
     recipe: recipeID,
   };
 
-  fetch("http://127.0.0.1:8000/comment/list/", {
+  fetch("https://recipehub-backend-ya12.onrender.com/comment/list/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -377,7 +377,7 @@ function postComment(recipeID) {
     .then((data) => (commentText.value = ""));
 }
 const deleteComment = (commentID) => {
-  fetch(`http://127.0.0.1:8000/comment/list/${commentID}/`, {
+  fetch(`https://recipehub-backend-ya12.onrender.com/comment/list/${commentID}/`, {
     method: "DELETE",
     headers: {
       "content-type": "application/json",

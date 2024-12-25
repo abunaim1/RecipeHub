@@ -15,7 +15,7 @@ const navBar = () => {
 };
 
 const loadPostForTrending = () => {
-  fetch("http://127.0.0.1:8000/kitchen/post/")
+  fetch("https://recipehub-backend-ya12.onrender.com/kitchen/post/")
     .then((res) => res.json())
     .then((data) => {
       const winterRecipes = data.filter((item) => item.seasonal === "Winter");
@@ -40,7 +40,7 @@ const displayTrendingData = (items) => {
 document.addEventListener("DOMContentLoaded", loadPostForTrending);
 
 const popularRecipeCount = () => {
-  fetch("http://127.0.0.1:8000/comment/react/list/")
+  fetch("https://recipehub-backend-ya12.onrender.com/comment/react/list/")
     .then((res) => res.json())
     .then((data) => {
       // Create a map to count occurrences of each recipe_id
@@ -61,7 +61,7 @@ const popularRecipeCount = () => {
 
 const getPopularRecipe = (recipeIdObject) => {
   const recipeIds = Object.values(recipeIdObject);
-  fetch("http://127.0.0.1:8000/kitchen/post/")
+  fetch("https://recipehub-backend-ya12.onrender.com/kitchen/post/")
     .then((res) => res.json())
     .then((data) => {
       // Filter the recipes whose recipe IDs match the extracted recipeIds

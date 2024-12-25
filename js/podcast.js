@@ -18,7 +18,7 @@ const navBar = () => {
 };
 
 const loadPodcast = () => {
-  fetch(`http://127.0.0.1:8000/podcast/premium/${podcast_id}`)
+  fetch(`https://recipehub-backend-ya12.onrender.com/podcast/premium/${podcast_id}`)
     .then((res) => res.json())
     .then((data) => displayPodcastPremium(data));
 };
@@ -41,7 +41,7 @@ const displayPodcastPremium = (data) => {
 loadPodcast();
 
 const loadEpisode = () => {
-  fetch("http://127.0.0.1:8000/podcast/episode/list/premium/")
+  fetch("https://recipehub-backend-ya12.onrender.com/podcast/episode/list/premium/")
     .then((res) => res.json())
     .then((data) =>
       data.forEach((item) => {
