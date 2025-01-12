@@ -93,33 +93,32 @@ const checkIfUserLiked = async (recipeId) => {
 };
 
 const toggleReaction = async (recipeId, to_userId) => {
-    const from_userId = localStorage.getItem("user_id");
-  
-    // Check if the user has already liked the recipe
-    const userHasLiked = await checkIfUserLiked(recipeId);
-  
-    if (userHasLiked) {
-      alert("You have already liked this recipe!");
-      return;
-    }
-    ws.send(
-      JSON.stringify({
-        recipe_id: recipeId,
-        to_userId: to_userId,
-        from_userId: from_userId,
-      })
-    );
-  
-    // After the reaction, update the button state
-    const likeButton = document.getElementById(`like-button-${recipeId}`);    
-    if (likeButton) {
-      likeButton.innerHTML = `<i class="fas fa-thumbs-up mr-1"></i> Liked`;
-      likeButton.disabled = true; // Disable the button
-    } else {
-      console.error("Like button element not found!");
-    }
+  const from_userId = localStorage.getItem("user_id");
+
+  // Check if the user has already liked the recipe
+  const userHasLiked = await checkIfUserLiked(recipeId);
+
+  if (userHasLiked) {
+    alert("You have already liked this recipe!");
+    return;
+  }
+  ws.send(
+    JSON.stringify({
+      recipe_id: recipeId,
+      to_userId: to_userId,
+      from_userId: from_userId,
+    })
+  );
+
+  // After the reaction, update the button state
+  const likeButton = document.getElementById(`like-button-${recipeId}`);
+  if (likeButton) {
+    likeButton.innerHTML = `<i class="fas fa-thumbs-up mr-1"></i> Liked`;
+    likeButton.disabled = true; // Disable the button
+  } else {
+    console.error("Like button element not found!");
+  }
 };
-  
 
 function toggleComments(button, recipeID) {
   const commentsSection = button.closest(".bg-white").querySelector(".comment-section"); // This now works
@@ -176,12 +175,12 @@ async function fetchGroups() {
 
     // Populate the group list
     groups.forEach((group) => {
-      //   console.log(group);
+        // console.log(group);
       const li = document.createElement("li");
       li.className = "border-b pb-2";
 
       const anchor = document.createElement("a");
-      anchor.href = `http://127.0.0.1:5500/chat.html?group_name=${encodeURIComponent(group.group_name)}`;
+      anchor.href = `http://127.0.0.1:5501/chat.html?group_name=${encodeURIComponent(group.group_name)}`;
       anchor.textContent = group.group_name;
       anchor.className = "text-gray-800 hover:underline";
 
@@ -192,6 +191,7 @@ async function fetchGroups() {
     console.error("There was a problem with the fetch operation:", error);
   }
 }
+
 // Function to add a new group
 async function addGroup() {
   const groupInput = document.getElementById("group-input");
@@ -376,6 +376,7 @@ function postComment(recipeID) {
     .then((res) => res.json())
     .then((data) => (commentText.value = ""));
 }
+
 const deleteComment = (commentID) => {
   fetch(`http://127.0.0.1:8000/comment/list/${commentID}/`, {
     method: "DELETE",
@@ -390,6 +391,7 @@ const deleteComment = (commentID) => {
     }
   });
 };
+
 const navBar = () => {
   const login = document.getElementById("login-control");
   const token = localStorage.getItem("tokens");
@@ -405,6 +407,7 @@ const navBar = () => {
       `;
   }
 };
+
 const logout = () => {
   alert("Logout Successfully");
   localStorage.removeItem("tokens");

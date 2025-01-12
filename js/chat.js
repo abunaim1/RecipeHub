@@ -123,7 +123,7 @@ const displayMsg = (item) => {
   };
   
 
-var ws = new WebSocket(`ws://127.0.0.1:8000/ws/ac/${search_group_name_modified}/`);
+var ws = new WebSocket(`ws://localhost:8000/ws/ac/${search_group_name_modified}/`);
 
 ws.onopen = function (event) {
   console.log("Websocket connection open...");
