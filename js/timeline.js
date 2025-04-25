@@ -181,11 +181,15 @@ async function fetchGroups() {
 
       const anchor = document.createElement("a");
       anchor.href = `http://127.0.0.1:5501/chat.html?group_name=${encodeURIComponent(group.group_name)}`;
-      anchor.textContent = group.group_name;
-      anchor.className = "text-gray-800 hover:underline";
+      user_id = localStorage.getItem("user_id")
+      if(group.user == user_id){
+        console.log(user_id);
+        anchor.textContent = group.group_name;
+        anchor.className = "text-gray-800 hover:underline";
+        li.appendChild(anchor);
+        groupList.appendChild(li);
+      }
 
-      li.appendChild(anchor);
-      groupList.appendChild(li);
     });
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
@@ -196,7 +200,7 @@ async function fetchGroups() {
 async function addGroup() {
   const groupInput = document.getElementById("group-input");
   const groupName = groupInput.value.trim();
-
+  const user = localStorage.getItem('user_id')
   if (groupName) {
     try {
       const response = await fetch("http://127.0.0.1:8000/chat/group/", {
@@ -204,7 +208,7 @@ async function addGroup() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ group_name: groupName }), // Adjust this structure according to your API's expectations
+        body: JSON.stringify({ user:user, group_name: groupName }), // Adjust this structure according to your API's expectations
       });
 
       if (!response.ok) throw new Error("Failed to add group");
@@ -239,7 +243,7 @@ const postSubmit = (event) => {
   const content = document.querySelector('textarea[placeholder="What\'s on your mind?"]').value;
   const flavor = document.querySelector('input[placeholder="Enter flavor"]').value;
   const region = document.querySelector('input[placeholder="Enter region"]').value;
-  const season = document.querySelector('input[placeholder="Enter season"]').value;
+  const season = document.getElementById('season').value;
 
   // Collecting files
   const imageInput = document.querySelector('input[type="file"][accept="image/*"]');
