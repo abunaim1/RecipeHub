@@ -18,7 +18,7 @@ const loadPostForTrending = () => {
   fetch("http://127.0.0.1:8000/kitchen/post/")
     .then((res) => res.json())
     .then((data) => {
-      const winterRecipes = data.filter((item) => item.seasonal === "Winter");
+      const winterRecipes = data.filter((item) => item.seasonal === "Summer");
       displayTrendingData(winterRecipes);
     })
     .catch((err) => console.error("Error fetching data:", err));
